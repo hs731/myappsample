@@ -1,2 +1,1 @@
-#MyApp
-just learning github
+#JustLearning
