@@ -1,0 +1,63 @@
+# worst case scenario
+
+blackleft = 5
+blackright = 5
+brownleft = 3
+brownright = 3
+greyleft = 2
+greyright = 2
+total = 20
+count = 0
+allMatched = False
+blackPaired = False
+brownPaired = False
+greyPaired = False
+
+def checkPairs():
+    # delcare as global so can reference global boolean vars. prevents reference error
+    global blackPaired
+    global brownPaired
+    global greyPaired
+    global allMatched
+    global count
+    
+    if blackleft<5 and blackright<5 and not blackPaired: # check black pair
+        blackPaired = True
+        print("first black pair made")
+    
+    elif brownleft<3 and brownright<3 and not brownPaired:# check brown pair
+        brownPaired = True
+        print("first brown pair made")
+    
+    elif greyleft<2 and greyright<2 and not greyPaired: # check grey pair
+        greyPaired = True
+        print("first grey pair made")
+        
+    if blackPaired and brownPaired and greyPaired: # check all paired
+        print("Matched all colours at glove " + str(count)) # convert int to str so can print
+        allMatched = True # end program
+
+while(not allMatched): # take glove if not all paired
+    if blackleft!=0:
+        blackleft = blackleft - 1
+        count = count + 1
+    elif blackright!=0:
+        blackright = blackright - 1
+        count = count + 1
+    elif brownleft!=0:
+        brownleft = brownleft - 1
+        count = count + 1
+    elif brownright!=0:
+        brownright = brownright - 1
+        count = count + 1
+    elif greyleft!=0:
+        greyleft = greyleft - 1
+        count = count + 1
+    elif greyright!=0:
+        greyright = greyright - 1
+        count = count + 1
+        
+    print("glove: " + str(count)) # convert int to str so can print
+    
+    checkPairs()
+    

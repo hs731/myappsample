@@ -1,0 +1,77 @@
+from random import *
+
+# choose random glove
+blackLeft = 5
+blackRight = 5
+brownLeft = 3
+brownRight = 3
+greyLeft = 2
+greyRight = 2
+glovesCollected = 0
+blackPaired = False
+brownPaired = False
+greyPaired = False
+allMatched = False
+
+#choose random glove
+#for i in range(100):
+    
+def GetRandomGlove():
+    gloves = ["blackLeft", "blackRight", "brownLeft", "brownRight", "greyLeft", "greyRight"]
+    index = randint(1, len(gloves) )    # Pick a random glove from array
+    nextGlove = gloves[index-1]
+    return nextGlove
+
+def GetNextGlove():
+    # allow access to global vars
+    global blackLeft, blackRight, brownLeft, brownRight, greyLeft, greyRight, glovesCollected
+    
+    gloveType = GetRandomGlove();
+    
+    # Remove glove if it exists
+    if gloveType == "blackLeft" and blackLeft > 0:
+        blackLeft = blackLeft - 1
+        glovesCollected = glovesCollected + 1
+    elif gloveType == "blackRight" and blackRight > 0:
+        blackRight = blackRight - 1
+        glovesCollected = glovesCollected + 1
+    elif gloveType == "brownLeft" and brownLeft > 0:
+        brownLeft = brownLeft - 1
+        glovesCollected = glovesCollected + 1
+    elif gloveType == "brownRight" and brownRight > 0:
+        brownRight = brownRight - 1
+        glovesCollected = glovesCollected + 1
+    elif gloveType == "greyLeft" and greyLeft > 0:
+        greyLeft = greyLeft - 1
+        glovesCollected = glovesCollected + 1
+    elif gloveType == "greyRight" and greyRight > 0:
+        greyRight = greyRight - 1
+        glovesCollected = glovesCollected + 1
+
+def RemainingGloveNumber():
+    return blackLeft + blackRight + brownLeft + brownRight + greyLeft + greyRight
+
+def CheckPairs():
+    # allow access to global vars
+    global blackPaired, brownPaired, greyPaired, allMatched
+    
+    if(blackLeft < 5 and blackRight < 5 and not blackPaired):
+        print("black pair made")
+        blackPaired = True
+    elif(brownLeft < 3 and brownRight < 3 and not brownPaired):
+        print("brown pair made")
+        brownPaired = True
+    elif(greyLeft < 2 and greyRight < 2 and not greyPaired):
+        print("grey pair made")
+        greyPaired = True
+        
+    if (blackPaired and brownPaired and greyPaired):
+        print("All pairs matched at glove " + str(glovesCollected))
+        allMatched = True
+        
+        
+# main
+while(RemainingGloveNumber() != 0 and not allMatched):
+      GetNextGlove()
+      CheckPairs()
+    
